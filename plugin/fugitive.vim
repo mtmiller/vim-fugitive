@@ -31,8 +31,10 @@ function! s:shellesc(arg) abort
     return a:arg
   elseif &shell =~# 'cmd' && a:arg !~# '"'
     return '"'.a:arg.'"'
-  else
+  elseif exists('*shellescape')
     return shellescape(a:arg)
+  else
+    return '"'.a:arg.'"'
   endif
 endfunction
 
