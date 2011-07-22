@@ -838,6 +838,9 @@ function! s:Grep(bang,arg) abort
       elseif a:arg =~# '\%(^\| \)--cached\>'
         let entry.filename = s:repo().translate(':0:'.bufname(entry.bufnr))
         unlet! entry.bufnr
+      elseif v:version < 701
+        let entry.filename = bufname(entry.bufnr)
+        unlet! entry.bufnr
       endif
     endfor
     call setqflist(list,'r')
